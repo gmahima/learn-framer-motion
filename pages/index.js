@@ -5,22 +5,24 @@ import {motion} from 'framer-motion'
 const Container = styled(motion.div)`
 ${tw `
  bg-gray-100 min-h-screen
- flex flex-col items-center
+ flex flex-col items-center justify-center
  p-12
 `}
 `
 const Sample = styled(motion.div)`
 ${tw `
- bg-gray-400 w-56 h-56
- text-center 
+ bg-gray-400 w-32 h-32
  p-12
+ text-gray-800
+ rounded
+ text-sm
 `}
 `
 
 export default function Home() {
   return (
     <Container>
-      <Sample animate={{ scale: 0.5 }}>
+      <Sample animate={{ x: 100 }}>
         hey
       </Sample>
     </Container>
