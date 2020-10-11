@@ -2,6 +2,7 @@ import styled, {css} from 'styled-components'
 import tw from 'twin.macro'
 import {motion} from 'framer-motion'
 import {Close} from '@styled-icons/evaicons-solid'
+import {ArrowRightS, ArrowLeftS} from '@styled-icons/remix-line'
 import React, {useState} from 'react'
 const ModalContainer = styled.div `
 ${tw `
@@ -17,35 +18,57 @@ ${tw `flex h-12 w-full items-center justify-end`}
 
 const MainContent= styled.div `
 ${tw `
-grid grid-cols-5 bg-red-400
+grid grid-cols-5
 `}
 `
 const ImageContainer = styled.div `
 ${tw `
-flex items-center justify-center col-start-2 col-end-5 bg-pink-200 
+flex items-center justify-center col-start-2 col-end-5 bg-black
+`}
+`
+const NavArrowDiv = styled.div `
+${tw `
+flex items-center justify-center
 `}
 `
 
 const Footer = styled.div `
 ${tw `flex h-12 w-full items-center justify-end`}
 `
-const CarouselModal = ({urls, show, closeModal, initialIndex}) => {
-    if(!show) {
-        return (<></>)
+const CarouselModal = ({urls, closeModal, initialIndex}) => {
+    console.log(initialIndex)
+    const [index, setIndex] = useState(initialIndex)
+
+    const showPrev = () => {
+        if(index>0) {
+            setIndex(index-1)
+        }
     }
+    const showNext = () => {
+        if(index<urls.length-1) {
+            setIndex(index+1)
+        }
+    }
+
     return (
         <ModalContainer>
             <ContentWrapper>
                 <Header>
-                     <Close css={tw ` cursor-pointer w-8 h-8 text-gray-100`} onClick={closeModal}/> 
+                     <Close css={tw ` cursor-pointer w-8 h-8 text-gray-100`} onClick={closeModal} /> 
                 </Header>
                 <MainContent>
+                    <NavArrowDiv>
+                        <ArrowLeftS css={tw `text-gray-400 w-32 cursor-pointer`} onClick={() => {showPrev()}}></ArrowLeftS>
+                    </NavArrowDiv>
                     <ImageContainer>
-                        <img src={urls[0]} />
+                        {console.log(index)}
+                        <img src={urls[index]} />
                     </ImageContainer>
+                    <NavArrowDiv>
+                        <ArrowRightS css={tw `text-gray-400 w-32 cursor-pointer`} onClick={() => {showNext()}}></ArrowRightS>
+                    </NavArrowDiv>
                 </MainContent>
                 <Footer></Footer>
-                {/* <div css={tw `bg-red-300`}>asdf</div> */}
             </ContentWrapper>
         </ModalContainer>
     )

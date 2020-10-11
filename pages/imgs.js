@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useCallback} from 'react'
 import styled from 'styled-components'
 import tw from 'twin.macro'
 import {motion} from 'framer-motion'
@@ -18,7 +18,7 @@ grid grid-cols-4 gap-8 border
 `
 
 const Image = styled.img `
-${tw ``}
+${tw `w-auto h-auto`}
 `
 
 const ImageContainer = styled.div `
@@ -26,46 +26,33 @@ ${tw `flex bg-gray-300 p-6 justify-center items-center cursor-pointer`}
 `
 
 const urls = [
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/100x200",
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/400x400",
-    "https://source.unsplash.com/random/400x400"
+    "https://source.unsplash.com/21LYqbqre8w/400x400/",
+    "https://source.unsplash.com/NEab1U1FfKM/400x400",
+    "https://source.unsplash.com/8beTH4VkhLI/400x400",
+    "https://source.unsplash.com/5A0O12BIsjY/400x400",
+    "https://source.unsplash.com/Wpg3Qm0zaGk/400x400",
+    "https://source.unsplash.com/cLpdEA23Z44/400x400",
+    "https://source.unsplash.com/3sl9_ubYIno/400x400",
+    "https://source.unsplash.com/Jg2XRpsON9U/700x300"
 
 ]
 
 
 
 export default function Home() {
-    const [show, setShow] = useState(false)
-    const closeModal = () => {setShow(false)}
-    const [initialIndex, setInitialIndex] = useState(0)
-
+    const [showModal, setShowModal] = useState(false)
+    const [initialIndex, setInitialIndex] = useState(-1)
+    const closeModal = () => {setShowModal(false)}
+    const handleClick = useCallback((i) => {
+        setInitialIndex(i)
+        setShowModal(true)
+    }, [])
     return (
         <>
-            <CarouselModal urls={urls} closeModal={closeModal} show={show} initialIndex={initialIndex}/>
+            {showModal ? <CarouselModal urls={urls} closeModal={closeModal} initialIndex={initialIndex} show={showModal} />: null}
             <Container>
                 <Content>
-                    {urls.map((url, i) => (<ImageContainer key={i.toString()} onClick={() => {setShow(true); setInitialIndex(i)}}><Image src={url}></Image></ImageContainer>))}
+                    {urls.map((url, i) => (<ImageContainer key={i.toString()} onClick={() => {handleClick(i)}}><Image src={url}></Image></ImageContainer>))}
                 </Content>      
             </Container>
         </>  
