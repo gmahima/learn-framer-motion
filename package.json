@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@popmotion/popcorn": "^0.4.4",
     "@styled-icons/evaicons-solid": "^10.18.0",
     "@styled-icons/remix-line": "^10.18.0",
     "framer-motion": "^2.7.7",
