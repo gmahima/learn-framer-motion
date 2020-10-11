@@ -13,27 +13,32 @@ ${tw `
 
 const Content = styled(motion.div)`
 ${tw `
-grid grid-cols-4 gap-8 border
+
 `}
 `
 
 const Image = styled.img `
-${tw `w-auto h-auto`}
+${tw ``}
 `
 
 const ImageContainer = styled.div `
-${tw `flex bg-gray-300 p-6 justify-center items-center cursor-pointer`}
+${tw `flex items-center justify-center bg-white w-full h-full p-8 cursor-pointer`}
+`
+const Gallery = styled.div `
+${tw `bg-gray-200 grid grid-cols-4 gap-2 p-12 h-80 overflow-y-auto overscroll-none`}
 `
 
 const urls = [
-    "https://source.unsplash.com/21LYqbqre8w/400x400/",
+    "https://source.unsplash.com/J7gpdvyyuEA/400x400/",
     "https://source.unsplash.com/NEab1U1FfKM/400x400",
     "https://source.unsplash.com/8beTH4VkhLI/400x400",
     "https://source.unsplash.com/5A0O12BIsjY/400x400",
     "https://source.unsplash.com/Wpg3Qm0zaGk/400x400",
     "https://source.unsplash.com/cLpdEA23Z44/400x400",
-    "https://source.unsplash.com/3sl9_ubYIno/400x400",
-    "https://source.unsplash.com/Jg2XRpsON9U/700x300"
+    "https://source.unsplash.com/3sl9_ubYIno/700x700",
+    "https://source.unsplash.com/Jg2XRpsON9U/400x300",
+    "https://source.unsplash.com/oBX-b6ltYts/400x400",
+    "https://source.unsplash.com/OPOg0fz5uIs/400x400",
 
 ]
 
@@ -52,7 +57,9 @@ export default function Home() {
             {showModal ? <CarouselModal urls={urls} closeModal={closeModal} initialIndex={initialIndex} show={showModal} />: null}
             <Container>
                 <Content>
-                    {urls.map((url, i) => (<ImageContainer key={i.toString()} onClick={() => {handleClick(i)}}><Image src={url}></Image></ImageContainer>))}
+                    <Gallery>
+                        {urls.map((url, i) => (<ImageContainer key={i.toString()} onClick={() => {handleClick(i)}}><Image src={url}></Image></ImageContainer>))}
+                    </Gallery>
                 </Content>      
             </Container>
         </>  

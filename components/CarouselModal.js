@@ -6,7 +6,7 @@ import {ArrowRightS, ArrowLeftS} from '@styled-icons/remix-line'
 import React, {useState} from 'react'
 const ModalContainer = styled.div `
 ${tw `
-z-50 top-0 left-0 w-full h-full bg-black bg-opacity-75 fixed flex justify-center items-center
+z-50 top-0 left-0 w-full h-full bg-black bg-opacity-90 fixed flex justify-center items-center
 `}
 `
 const ContentWrapper = styled.div `
