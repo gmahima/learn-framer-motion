@@ -4,6 +4,14 @@ import {motion} from 'framer-motion'
 import {Close} from '@styled-icons/evaicons-solid'
 import {ArrowRightS, ArrowLeftS} from '@styled-icons/remix-line'
 import React, {useState} from 'react'
+import "styled-components/macro";
+
+const variant = props => {
+    if(props.disabled) {
+        return tw `text-gray-800 cursor-default`
+    }
+}
+
 const ModalContainer = styled.div `
 ${tw `
 z-50 top-0 left-0 w-full h-full bg-black bg-opacity-90 fixed flex justify-center items-center
@@ -32,12 +40,9 @@ flex items-center justify-center text-gray-400
 `}
 svg {
     ${tw `w-32 cursor-pointer`}
+    ${variant}
 }
-${props => {
-    if(props.disabled) {
-        return tw`text-gray-700`
-    }
-}}
+
 `
 
 const Footer = styled.div `
